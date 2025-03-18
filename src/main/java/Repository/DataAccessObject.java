@@ -1,11 +1,10 @@
-package Service;
-import Database.DatabaseConnection;
+package Repository;
 import Model.tblEmployee;
 import lombok.RequiredArgsConstructor;
 import java.sql.*;
 
 @RequiredArgsConstructor //Gera automaticamente o construtor que aceita 'Connection' como parâmetro
-public class DataAccessObject {
+public class  DataAccessObject {
     //Conexão com banco de dados é obrigátoria e será injetada automaticamente
     private final Connection connection; //usado final para garantir que a conexão não será alterada
 
