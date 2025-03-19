@@ -2,7 +2,7 @@ package Model;
 import lombok.*;
 
 @Data
-public class tblSector {
+public class TblSector {
     Integer idSector;
     String nameSector;
     Integer idEmployee;
