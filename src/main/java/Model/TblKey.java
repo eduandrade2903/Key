@@ -4,9 +4,9 @@ import java.util.Date;
 
 @Data
 public class TblKey {
-    Integer idKey;
-    Integer idSector;
-    String  keyDescription;
-    Date    withdrawDate;
-    Date    returnDate;
+    private Integer idKey;
+    private Integer idSector;
+    private String  keyDescription;
+    private Date    withDrawDate;
+    private Date    returnDate;
 }
