@@ -9,6 +9,8 @@ public class EmployeeService  {
 
  @Autowired
     private EmployeeRepository employeeRepository;
+
+
     //Cria no banco um novo colaborador
    public TblEmployee createEmployee(TblEmployee employee) {
        return employeeRepository.save(employee);
