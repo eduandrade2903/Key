@@ -1,6 +1,7 @@
 package Service;
 import Model.TblEmployee;
 import Repository.EmployeeRepository;
+import org.hibernate.id.IntegralDataTypeHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -12,10 +13,12 @@ public class EmployeeService  {
    public TblEmployee createEmployee(TblEmployee employee) {
        return employeeRepository.save(employee);
     }
+
     //Busca o colaborador pelo Id
     public TblEmployee getEmployeeById(Integer idEmployee) {
        return employeeRepository.findById(idEmployee).orElse(null);
     }
+
     //Atualiza qualquer dado do empregado
     public TblEmployee updateEmployeeById(Integer idEmployee, TblEmployee updatedEmployee) {
        //busca por id
@@ -35,7 +38,9 @@ public class EmployeeService  {
             }
             return employeeRepository.save(employee);
         }
-
+    public void deleteEmployeeById(Integer idEmployee) {
+          employeeRepository.deleteById(idEmployee);
+    }
 
 }
 

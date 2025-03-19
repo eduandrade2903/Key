@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "tbl_employee")
 @Data
 public class TblEmployee {
 
