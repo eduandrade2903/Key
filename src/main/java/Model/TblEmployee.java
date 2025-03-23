@@ -9,7 +9,6 @@ public class TblEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     //declaração das colunas dentro da tabela do DB
-
     public Integer idEmployee;
     public  String nameEmployee;
     public String  positionEmployee;
