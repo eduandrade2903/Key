@@ -9,4 +9,14 @@ public class TblKey {
     private String  keyDescription;
     private Date    withDrawDate;
     private Date    returnDate;
+
+    public void setWithDrawDate(Date withDrawDate) {
+        this.withDrawDate = withDrawDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
 }
+
+

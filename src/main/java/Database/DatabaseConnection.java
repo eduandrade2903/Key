@@ -5,13 +5,13 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     //String de conexão co o banco de dados
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=Banco_Chave;integratedSecurity=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/banco_dados";
 
     //método para carregar o driver de conexão
     public static Connection connect() throws SQLException {
         try {
             //carrega o driver jdbc
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
                 return  DriverManager.getConnection(URL);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Driver não encontrado", e );
