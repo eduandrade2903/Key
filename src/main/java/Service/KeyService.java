@@ -5,6 +5,7 @@ import Repository.KeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class KeyService {
 
@@ -15,27 +16,29 @@ public class KeyService {
     public TblKey createNewKey (TblKey key) { return keyRepository.save(key); }
 
     //Busca chave pelo id
-    public TblKey serchKeyById (Integer idKey) { return keyRepository.findById(idKey).orElse(null); }
+    public Optional<TblKey> serchKeyById(Integer idKey) { return keyRepository.findById(idKey); }
 
     //Cria descrição da na tabela
     public TblKey createDescription(TblKey description) { return  keyRepository.save(description); }
 
     //insere uma data de retirada da chave
-    public TblKey setwithDrawDate ( Integer idKey, Date withDrawDate) {
-       TblKey key = serchKeyById(idKey);
-        if (key != null) {
-            key.setWithDrawDate(withDrawDate);
-            return keyRepository.save(key);
+    public TblKey setwithDrawDate ( Integer idKey, Date date) {
+        Optional<TblKey> keyOptional = serchKeyById(idKey); //recupera o objeto TblKey baseado no id
+        if (keyOptional.isPresent()) { //verifica se o objeto foi recuperado
+            TblKey key = keyOptional.get(); //peva o objeto TblKey
+            key.setWithDrawDate(date); //atualiza a data de retirada
+            return keyRepository.save(key); // salva o ojetco atualizado
         }
         return null;
     }
 
     //insere uma data de devolução
     public TblKey setReturnDate ( Integer idKey, Date returnDate) {
-        TblKey key = serchKeyById(idKey);
-        if (key != null) {
-            key.setReturnDate(returnDate);
-            return keyRepository.save(key);
+        Optional<TblKey> key = serchKeyById(idKey);
+        if (key.isPresent()) {
+            TblKey keyReturn = key.get();
+          keyReturn.setReturnDate(returnDate);
+            return keyRepository.save(keyReturn);
         }
         return null;
     }
