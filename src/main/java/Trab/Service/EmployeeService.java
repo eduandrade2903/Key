@@ -2,7 +2,9 @@ package Trab.Service;
 import Trab.Model.TblEmployee;
 import Trab.Repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,14 +27,18 @@ public class EmployeeService  {
       return employeeRepository.findByidEmployee(idEmployee);
    }
 
-   public String puxa(){
-       return "Funciona bosta";
-    }
-
     //Atualiza qualquer dado do empregado
-    public TblEmployee updateEmployee(TblEmployee employee) {
-        return employeeRepository.save(employee);
-    }
+   public TblEmployee updateEmployee(Integer id, TblEmployee employeeDetails) {
+       return employeeRepository.findByidEmployee(id)
+               .map(employee -> {
+                employee.setNameEmployee(employeeDetails.getNameEmployee());
+                employee.setPositionEmployee(employeeDetails.getPositionEmployee());
+                employee.setIdSector(employeeDetails.getIdSector());
+                return employeeRepository.save(employee);
+            }
+       ).orElseThrow(() -> new RuntimeException("Employee not found wiht id: " + id));
+   }
+    //Deleta o empregado pelo id
     public void deleteEmployeeById(Integer idEmployee) {
           employeeRepository.deleteById(idEmployee);
     }
@@ -41,6 +47,7 @@ public class EmployeeService  {
     public List<TblEmployee> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
 
 }
 
