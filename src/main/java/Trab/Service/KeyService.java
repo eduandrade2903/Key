@@ -1,7 +1,7 @@
-package Service;
+package Trab.Service;
 
-import Model.TblKey;
-import Repository.KeyRepository;
+import Trab.Model.TblKey;
+import Trab.Repository.KeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;

@@ -1,6 +1,6 @@
-package Repository;
+package Trab.Repository;
 
-import Model.TblPosition;
+import Trab.Model.TblPosition;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PositionRepository extends JpaRepository <TblPosition, InternalError> {

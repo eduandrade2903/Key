@@ -1,6 +1,6 @@
-package Trab.Trab;
+package Trab;
 
-//import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
