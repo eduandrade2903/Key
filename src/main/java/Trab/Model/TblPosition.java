@@ -1,8 +1,5 @@
 package Trab.Model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -10,8 +7,11 @@ import lombok.*;
 public class TblPosition {
 
     @Id
-
+    @Column(name= "idposition")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idPosition;
+    @Column(name= "positionname")
     private String positionName;
+    @Column(name= "idemployee")
     private Integer idEmployee;
 }
