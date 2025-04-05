@@ -1,6 +1,6 @@
-package Repository;
+package Trab.Repository;
 
-import Model.TblKey;
+import Trab.Model.TblKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
