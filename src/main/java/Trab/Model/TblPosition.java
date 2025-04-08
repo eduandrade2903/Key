@@ -8,10 +8,9 @@ public class TblPosition {
 
     @Id
     @Column(name= "idposition")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPosition;
+
     @Column(name= "positionname")
     private String positionName;
-    @Column(name= "idemployee")
-    private Integer idEmployee;
 }

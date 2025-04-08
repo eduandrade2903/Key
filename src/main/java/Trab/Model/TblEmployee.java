@@ -8,15 +8,15 @@ import lombok.Data;
 public class TblEmployee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer idEmployee;
 
     @Column(name = "nameemployee")
     private String  nameEmployee;
 
-    @Column(name = "positionemployee")
-    private String  positionEmployee;
+    @Column(name = "idposition")
+    private Integer  idPosition;
 
     @Column(name = "idsector")
     private Integer idSector;

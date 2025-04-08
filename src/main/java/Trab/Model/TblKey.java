@@ -9,16 +9,20 @@ import java.util.Date;
 public class TblKey {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="idkey")
     private Integer idKey;
+
     @Column(name = "idsector")
     private Integer idSector;
+
     @Column(name = "keydescription")
     private String  keyDescription;
+
     @Setter
-    @Column(name = "keywithdrawdate")
-    private Date    withDrawDate;
+    @Column(name = "withdrawdate")
+    private Date    withdrawDate;
+
     @Setter
     @Column(name = "returndate")
     private Date    returnDate;

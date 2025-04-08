@@ -7,10 +7,9 @@ import lombok.*;
 public class TblSector {
     @Id
     @Column(name = "idsector")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSector;
+
     @Column(name = "namesector")
     private String nameSector;
-    @Column(name = "idemployee")
-    private Integer idEmployee;
 }
