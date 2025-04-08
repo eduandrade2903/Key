@@ -19,7 +19,7 @@ public class TblKey {
     private String  keyDescription;
     @Setter
     @Column(name = "keywithDrawdate")
-    private Date    withDrawDate;
+    private Date    withdrawDate;
     @Setter
     @Column(name = "returnDate")
     private Date    returnDate;
