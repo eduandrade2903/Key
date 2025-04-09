@@ -9,8 +9,6 @@ public class UpdatedEmployeeDTO {
 
     @NotBlank
     private String nameEmployee;
-    @NotBlank
-    private String positionEmployee;
     @NotNull
     private Integer idSector;
 }

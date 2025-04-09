@@ -15,7 +15,6 @@ public class EmployeeResponseDTO {
     public  EmployeeResponseDTO(TblEmployee emp) {
         this.idEmployee = emp.getIdEmployee();
         this.nameEmployee = emp.getNameEmployee();
-        this.positionEmployee = emp.getPositionEmployee();
         this.idSector = emp.getIdSector();
     }
 }

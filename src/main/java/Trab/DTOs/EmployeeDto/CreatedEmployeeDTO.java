@@ -8,8 +8,6 @@ import lombok.Data;
 public class CreatedEmployeeDTO {
     @NotBlank(message = "Name cannot be blank")
     private String nameEmployee;
-    @NotBlank(message = "Position cannot be blank")
-    private String positionEmployee;
     @NotNull(message = "idSector cannot be null")
     private Integer idSector;
 }
