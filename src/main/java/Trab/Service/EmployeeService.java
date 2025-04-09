@@ -20,7 +20,6 @@ public class EmployeeService  {
     public TblEmployee createEmployee(CreatedEmployeeDTO dto) {
         TblEmployee emp = new TblEmployee();
         emp.setNameEmployee(dto.getNameEmployee());
-        emp.setPositionEmployee(dto.getPositionEmployee());
         emp.setIdSector(dto.getIdSector());
         return employeeRepository.save(emp);
     }
@@ -34,9 +33,7 @@ public class EmployeeService  {
     public TblEmployee updateEmployee(Integer id, UpdatedEmployeeDTO dto) {
         TblEmployee emp = employeeRepository.findByidEmployee(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
-
         emp.setNameEmployee(dto.getNameEmployee());
-        emp.setPositionEmployee(dto.getPositionEmployee());
         emp.setIdSector(dto.getIdSector());
 
         return employeeRepository.save(emp);

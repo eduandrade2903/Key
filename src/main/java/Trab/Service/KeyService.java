@@ -23,27 +23,9 @@ public class KeyService {
     //Create a description for the key
     public TblKey createDescription(TblKey description) { return  keyRepository.save(description); }
 
-    //Enter a withdrawal date
-    public TblKey setwithDrawDate ( Integer idKey, Date date) {
-        Optional<TblKey> keyOptional = serchKeyById(idKey); //Retrieve the key by id
-        if (keyOptional.isPresent()) { //Verify if the key exists
-            TblKey key = keyOptional.get(); //Get the key object
-            key.setWithDrawDate(date); //Update the withdrawal date
-            return keyRepository.save(key); //Save the updated key
-        }
-        return null;
-    }
 
-    //enter a return date
-    public TblKey setReturnDate ( Integer idKey, Date returnDate) {
-        Optional<TblKey> key = serchKeyById(idKey);
-        if (key.isPresent()) {
-            TblKey keyReturn = key.get();
-          keyReturn.setReturnDate(returnDate);
-            return keyRepository.save(keyReturn);
-        }
-        return null;
-    }
+
+
 
 }
 
