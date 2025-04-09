@@ -12,18 +12,15 @@ import lombok.NonNull;
 public class TblEmployee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @NotNull
     private Integer idEmployee;
     @NotBlank
-    @Column(name = "nameEmployee")
+    @Column(name = "name")
     private String  nameEmployee;
-    @NotBlank
-    @Column(name = "positionEmployee")
-    private String  positionEmployee;
     @NotNull
-    @Column(name = "idSector")
+    @Column(name = "id_Sector")
     private Integer idSector;
 
 

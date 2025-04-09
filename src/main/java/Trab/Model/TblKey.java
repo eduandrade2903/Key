@@ -1,8 +1,6 @@
 package Trab.Model;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
-
 
 @Entity
 @Data
@@ -10,19 +8,15 @@ import java.util.Date;
 public class TblKey {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name ="idKey")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="id")
     private Integer idKey;
+    @Column(name = "name")
+    private String  name;
+    @Column(name = "available")
+    private Boolean available;
     @Column(name = "idSector")
     private Integer idSector;
-    @Column(name = "keyDescription")
-    private String  keyDescription;
-    @Setter
-    @Column(name = "keywithDrawdate")
-    private Date    withdrawDate;
-    @Setter
-    @Column(name = "returnDate")
-    private Date    returnDate;
 
 }
 
