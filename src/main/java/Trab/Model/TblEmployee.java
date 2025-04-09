@@ -19,9 +19,10 @@ public class TblEmployee {
     @NotBlank
     @Column(name = "name")
     private String  nameEmployee;
+    @ManyToOne
     @NotNull
-    @Column(name = "id_Sector")
-    private Integer idSector;
+    @JoinColumn(name = "id_Sector", nullable = false)
+    private TblSector sector;
 
 
 }
