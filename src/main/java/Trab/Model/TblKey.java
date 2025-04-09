@@ -11,12 +11,16 @@ public class TblKey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
     private Integer idKey;
+
     @Column(name = "name")
     private String  name;
+
     @Column(name = "available")
     private Boolean available;
-    @Column(name = "idSector")
-    private Integer idSector;
+
+    @OneToOne
+    @JoinColumn(name = "id_Sector", nullable = false)
+    private TblSector sector;
 
 }
 

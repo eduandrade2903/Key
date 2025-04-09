@@ -1,6 +1,7 @@
 package Trab.DTOs.KeyDTOs;
 
 import Trab.Model.TblKey;
+import Trab.Model.TblSector;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -8,14 +9,12 @@ import java.time.LocalDateTime;
 public class KeyResponseDTO {
     private Integer idKey;
     private String Name;
-
-
-    private Integer idSector;      //Direct Fk (if needs ID)
-    private String nameSector;     //Sector name (JOIN)
+    private TblSector Sector;    //Sector name (JOIN)
 
     public KeyResponseDTO(TblKey key) {
         this.idKey = key.getIdKey();
         this.Name = key.getName();
+        this.Sector = key.getSector();
     }
 
 
