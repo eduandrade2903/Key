@@ -10,7 +10,8 @@ public class TblSector {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSector;
+
     @Column(name = "name")
-    private String nameSector;
+    private String name;
 
 }
