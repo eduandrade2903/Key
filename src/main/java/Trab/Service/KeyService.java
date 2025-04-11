@@ -1,11 +1,8 @@
 package Trab.Service;
 
-import Trab.DTOs.EmployeeDto.CreatedEmployeeDTO;
 import Trab.DTOs.KeyDTOs.CreatedKeyDTO;
-import Trab.Model.TblEmployee;
 import Trab.Model.TblKey;
 import Trab.Model.TblSector;
-import Trab.Repository.EmployeeRepository;
 import Trab.Repository.KeyRepository;
 import Trab.Repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,19 +29,37 @@ public class KeyService {
 
         TblKey _key = new TblKey();
         _key.setName(key.getName());
-        _key.setAvailable(true);
+        _key.setAvailable(1);
         _key.setSector(sector);
 
         return keyRepository.save(_key);
     }
 
     //Search key by id
-    public Optional<TblKey> serchKeyById(Integer idKey) { return keyRepository.findById(idKey); }
+    public Optional<TblKey> serchKeyById(Integer idKey) {
+        return keyRepository.findById(idKey);
+    }
 
-    //Create a description for the key
-    public TblKey createDescription(TblKey description) { return  keyRepository.save(description); }
+    public List<TblKey> getAllKeys() {
+        return keyRepository.findAll();
+    }
 
+    //Update key by id
+    public TblKey updateKey(Integer id) {
+        TblKey existingKey = keyRepository.findById(id).orElseThrow(() -> new RuntimeException("Key not found"));
+        //existingKey.setName(key.getName());
+        Integer valor = existingKey.getAvailable();
+        if (valor == 1) {
+            existingKey.setAvailable(0);
+        } else {
+            existingKey.setAvailable(1);
+        }
+        return keyRepository.save(existingKey);
+    }
 
+    public void deleteKeyById(Integer id) {
+        keyRepository.deleteById(id);
+    }
 
 
 }

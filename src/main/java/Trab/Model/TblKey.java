@@ -16,7 +16,7 @@ public class TblKey {
     private String  name;
 
     @Column(name = "available")
-    private Boolean available;
+    private Integer available;
 
     @OneToOne
     @JoinColumn(name = "id_Sector", nullable = false)

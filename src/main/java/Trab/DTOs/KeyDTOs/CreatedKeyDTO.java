@@ -12,7 +12,7 @@ public class CreatedKeyDTO {
     private String name;
 
     @NotNull(message = "Sempre começa com TRUE")
-    private boolean available;
+    private Integer available;
 
     @NotNull(message = "É obrigatório informar o setor")
     private Integer idSector;
