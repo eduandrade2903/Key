@@ -7,14 +7,17 @@ import Trab.Model.TblSector;
 import Trab.Repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class SectorService {
+
+     @Autowired
      private SectorRepository sectorRepository;
      private final ModelMapper modelMapper;
 
@@ -22,9 +25,8 @@ public class SectorService {
          return sectorRepository.findAll();
      }
 
-     public SectorResponseDTO getSectorById(Integer id) {
-         TblSector sector = sectorRepository.findById(id).orElseThrow(() -> new RuntimeException("Setor nao encontrado"));
-         return modelMapper.map(sector, SectorResponseDTO.class);
+     public Optional<TblSector> getSectorById(Integer id) {
+         return sectorRepository.findById(id);
      }
 
      public TblSector createNewSector(CreatedSectorDTO sector) {
