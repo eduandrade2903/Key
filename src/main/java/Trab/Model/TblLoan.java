@@ -1,6 +1,7 @@
 package Trab.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -15,4 +16,14 @@ public class TblLoan {
     private Integer idEmployee;
     @Column (name = "id_key")
     private Integer idKey;
+
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "id", nullable = false)
+    private TblEmployee employee;
+
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "id", nullable = false)
+    private TblKey key;
 }
