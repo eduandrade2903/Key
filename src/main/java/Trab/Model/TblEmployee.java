@@ -19,11 +19,15 @@ public class TblEmployee {
     @NotBlank
     @Column(name = "name")
     private String  nameEmployee;
+
     @ManyToOne
     @NotNull
     @JoinColumn(name = "id_Sector", nullable = false)
     private TblSector sector;
 
 
+
+    //public TblEmployee(Integer id, String nameEmployee, Integer idSector) {
+   // }
 }
 

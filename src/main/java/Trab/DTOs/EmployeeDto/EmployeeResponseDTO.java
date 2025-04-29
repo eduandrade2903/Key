@@ -17,4 +17,7 @@ public class EmployeeResponseDTO {
         this.nameEmployee = emp.getNameEmployee();
         this.idSector = emp.getSector();
     }
+
+    //public EmployeeResponseDTO(Integer idEmployee, String nameEmployee, Integer idSector) {
+    //}
 }

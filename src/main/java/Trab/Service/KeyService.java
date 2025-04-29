@@ -6,7 +6,7 @@ import Trab.Model.TblSector;
 import Trab.Repository.KeyRepository;
 import Trab.Repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class KeyService {
     @Autowired
     private KeyRepository keyRepository;
     private final SectorRepository sectorRepository;
-    private final ModelMapper modelMapper;
+  //  private final ModelMapper modelMapper;
 
     //Create a new key in database
     public TblKey createNewKey (CreatedKeyDTO key) {

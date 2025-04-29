@@ -1,5 +1,6 @@
 package Trab.Service;
 import Trab.DTOs.EmployeeDto.CreatedEmployeeDTO;
+import Trab.DTOs.EmployeeDto.EmployeeResponseDTO;
 import Trab.DTOs.EmployeeDto.UpdatedEmployeeDTO;
 import Trab.Model.TblEmployee;
 import Trab.Model.TblSector;
@@ -37,8 +38,10 @@ public class EmployeeService  {
 
 
    /// Busca o colaborador pelo Id
-   public Optional<TblEmployee> getEmployeeById(Integer idEmployee) {
-       return employeeRepository.findByidEmployee(idEmployee);
+   public EmployeeResponseDTO getEmployeeById(Integer idEmployee) {
+       TblEmployee employee = employeeRepository.findByidEmployee(idEmployee)
+               .orElseThrow(() -> new RuntimeException("Employee not found with id: " + idEmployee));
+       return modelMapper.map(employee, EmployeeResponseDTO.class);
     }
 
     //Update employee by id

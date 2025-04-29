@@ -5,6 +5,7 @@ import Trab.DTOs.EmployeeDto.EmployeeResponseDTO;
 import Trab.DTOs.EmployeeDto.CreatedEmployeeDTO;
 import Trab.DTOs.EmployeeDto.UpdatedEmployeeDTO;
 import Trab.Service.EmployeeService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,9 +26,10 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeResponseDTO> getEmployeeById(@PathVariable Integer id) {
-        return employeeService.getEmployeeById(id)
-                .map(emp -> ResponseEntity.ok(new EmployeeResponseDTO(emp)))
-                .orElse(ResponseEntity.notFound().build());
+        try{
+            EmployeeResponseDTO dto = employeeService.getEmployeeById(id);
+            return  ResponseEntity.ok(dto);
+        }catch (EntityNotFoundException e ) { return ResponseEntity.notFound().build();}
     }
 
     @PostMapping("/create")
