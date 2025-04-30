@@ -30,6 +30,7 @@ public class EmployeeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/create")
     public ResponseEntity<EmployeeResponseDTO> createEmployee(@RequestBody @Valid CreatedEmployeeDTO dto) {
         TblEmployee created = employeeService.createEmployee(dto);
@@ -52,6 +53,7 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     public ResponseEntity<List<EmployeeResponseDTO>> getAllEmployees() {
         List<TblEmployee> employees = (List<TblEmployee>) employeeService.getAllEmployees();

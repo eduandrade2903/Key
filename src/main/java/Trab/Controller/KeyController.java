@@ -27,6 +27,7 @@ public class KeyController {
         return keyservice.serchKeyById(id);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     public ResponseEntity<List<KeyResponseDTO>> getAllKeys() {
         List<TblKey> keys = keyservice.getAllKeys();
@@ -36,6 +37,7 @@ public class KeyController {
         return ResponseEntity.ok(response);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/create")
     public ResponseEntity<KeyResponseDTO> createKey(@RequestBody @Valid CreatedKeyDTO key) {
         TblKey created = keyservice.createNewKey(key);

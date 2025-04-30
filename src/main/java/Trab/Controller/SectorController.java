@@ -20,6 +20,7 @@ public class SectorController {
 
     private final SectorService sectorService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/all")
     public ResponseEntity<List<SectorResponseDTO>> getAll() {
         List<TblSector> sectors = sectorService.getAllSectors();
@@ -34,6 +35,7 @@ public class SectorController {
         return sectorService.getSectorById(Id);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/create")
     public ResponseEntity<SectorResponseDTO> create(@RequestBody @Valid CreatedSectorDTO sector) {
         TblSector created = sectorService.createNewSector(sector);
