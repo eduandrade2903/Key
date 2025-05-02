@@ -18,9 +18,10 @@ import org.springframework.stereotype.Service;
 public class LoanService {
 
     private LoanRepository loanRepository;
-    private ModelMapper modelMapper;
+    //private ModelMapper modelMapper;
     private EmployeeRepository employeeRepository;
     private KeyRepository keyRepository;
+    private KeyService auth;
 
 
     public TblLoan createLoan(LoanResponseDTO loan) {
@@ -33,6 +34,10 @@ public class LoanService {
 
         TblKey key = keyRepository.findById(idKey)
                 .orElseThrow(() -> new RuntimeException("Chave não encontrada"));
+
+        auth.avaiable(); //verifica se a chave está disponível
+
+
 
         TblLoan loanEmp = new TblLoan();
         loanEmp.setIdEmployee(loan.getIdEmployee());

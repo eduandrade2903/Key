@@ -19,11 +19,11 @@ public class TblLoan {
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private TblEmployee employee;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private TblKey key;
 }

@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class KeyService {
 
-    @Autowired
+
     private KeyRepository keyRepository;
     private final SectorRepository sectorRepository;
   //  private final ModelMapper modelMapper;
@@ -57,6 +57,16 @@ public class KeyService {
         return keyRepository.save(existingKey);
     }
 
+    //Lógica de consulta disponibilidade da chave
+    public TblKey avaiable() {
+        List<TblKey> keys = keyRepository.findAll();
+        for (TblKey key : keys) {
+            if (key.getAvailable() == 1) {
+                return key;
+            }
+        }
+        return ;
+    }
     public void deleteKeyById(Integer id) {
         keyRepository.deleteById(id);
     }

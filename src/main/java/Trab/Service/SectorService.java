@@ -17,9 +17,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SectorService {
 
-     @Autowired
+
      private SectorRepository sectorRepository;
-     private final ModelMapper modelMapper;
+     //private final ModelMapper modelMapper;
 
      public List<TblSector> getAllSectors() {
          return sectorRepository.findAll();
