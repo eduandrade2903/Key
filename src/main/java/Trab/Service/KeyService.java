@@ -54,6 +54,7 @@ public class KeyService {
         } else {
             existingKey.setAvailable(1);
         }
+        System.out.println();
         return keyRepository.save(existingKey);
     }
 
