@@ -43,7 +43,7 @@ public class KeyController {
         TblKey created = keyservice.createNewKey(key);
         return new ResponseEntity<>(new KeyResponseDTO(created), HttpStatus.CREATED);
     }
-
+    @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
     public ResponseEntity<KeyResponseDTO> updateKey(@PathVariable Integer id) {
         try {
@@ -53,7 +53,7 @@ public class KeyController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteKey(@PathVariable Integer id) {
         keyservice.deleteKeyById(id);

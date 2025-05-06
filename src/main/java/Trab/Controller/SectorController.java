@@ -29,7 +29,7 @@ public class SectorController {
                 .toList();
         return ResponseEntity.ok(response);
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/{id}")
     public Optional<TblSector> getById(@PathVariable("id") Integer Id){
         return sectorService.getSectorById(Id);
@@ -41,7 +41,7 @@ public class SectorController {
         TblSector created = sectorService.createNewSector(sector);
         return ResponseEntity.status(201).body(new SectorResponseDTO(created));
     }
-
+    @CrossOrigin(origins = "*")
     @PutMapping("/update/{id}")
     public ResponseEntity<SectorResponseDTO> update(@PathVariable Integer id, @RequestBody @Valid UpdateSectorDTO sector) {
         try {
@@ -51,7 +51,7 @@ public class SectorController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         try {
