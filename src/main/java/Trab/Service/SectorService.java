@@ -18,7 +18,7 @@ import java.util.Optional;
 public class SectorService {
 
 
-     private SectorRepository sectorRepository;
+     private final SectorRepository sectorRepository;
      //private final ModelMapper modelMapper;
 
      public List<TblSector> getAllSectors() {

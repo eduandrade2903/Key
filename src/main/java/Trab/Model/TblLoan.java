@@ -22,7 +22,7 @@ public class TblLoan {
     @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private TblEmployee employee;
 
-    @ManyToOne
+    @OneToOne
     @NotNull
     @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
     private TblKey key;

@@ -132,26 +132,58 @@
 <script>
     const api = 'http://localhost:8080';
 
+      function handleSubmit(formId, endpoint, getData, updateTable) {
+        document.getElementById(formId).addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = getData();
+            console.log(data); // Logando os dados para depuração
+            try {
+                const res = await fetch(`${api}/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.message || 'Erro ao salvar o registro.');
+                }
+                await res.json(); // Ou res.text() se o backend não retornar JSON
+                alert('Registro salvo com sucesso!');
+                if (updateTable) updateTable();
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        });
+    }
+
     function carregarTabela(endpoint, tabelaId, renderRow) {
-        fetch(`${api}/${endpoint}`)
+             fetch(`${api}/${endpoint}`)
             .then(res => res.json())
             .then(data => {
+            console.log(data); // Logando os dados para depuração
                 const tabela = document.getElementById(tabelaId);
                 tabela.innerHTML = data.map(renderRow).join('');
             });
     }
 
     function atualizarTabelaEmprestimos() {
-        carregarTabela('emprestimos', 'tabelaEmprestimos', emprestimo => `
+        carregarTabela('Loan/all', 'tabelaEmprestimos', emprestimo => `
             <tr>
-                <td>${emprestimo.id}</td>
-                <td>${emprestimo.funcionarioId}</td>
-                <td>${emprestimo.chaveId}</td>
+                <td>${emprestimo.idLoan}</td>
+                <td>${emprestimo.employee.nameEmployee}</td>
+                <td>${emprestimo.key.name}</td>
             </tr>
         `);
     }
 
     atualizarTabelaEmprestimos();
+
+    // Chamada para handleSubmit
+    handleSubmit('emprestimoForm', 'Loan/create', () => ({
+        idEmployee: parseInt(document.getElementById('idFuncionario').value),
+        idKey: parseInt(document.getElementById('idChaveEmprestimo').value)
+    }), atualizarTabelaEmprestimos);
+
 </script>
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

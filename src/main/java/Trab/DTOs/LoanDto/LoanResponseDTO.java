@@ -7,12 +7,12 @@ import lombok.Data;
 public class LoanResponseDTO {
 
     private Integer idLoan;
-    private Integer idEmployee;
-    private Integer idKey;
+    private Object Employee;
+    private Object Key;
 
     public LoanResponseDTO(TblLoan loan) {
         this.idLoan = loan.getIdLoan();
-        this.idEmployee = loan.getIdEmployee();
-        this.idKey = loan.getIdKey();
+        this.Employee = loan.getEmployee();
+        this.Key = loan.getKey();
     }
 }

@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class CreatedLoanDTO {
-    @NotBlank (message = "idLoan cannot be blank")
-    private Integer  idLoan;
 
     @NotBlank (message = "id_Employee cannot be blank")
     private  Integer idEmployee;
