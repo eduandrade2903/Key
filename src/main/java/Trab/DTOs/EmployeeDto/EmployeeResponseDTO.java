@@ -10,6 +10,7 @@ public class EmployeeResponseDTO {
     // DTO for employee response
     private  Integer idEmployee;
     private  String nameEmployee;
+    private Integer available;
     private TblSector idSector;
 
     public  EmployeeResponseDTO(TblEmployee emp) {
