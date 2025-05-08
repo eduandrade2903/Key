@@ -1,31 +1,26 @@
 package Trab.Model;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
-
 
 @Entity
 @Data
+@Table(name = "tbl_key")
 public class TblKey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="idkey")
+    @Column(name ="id")
     private Integer idKey;
 
-    @Column(name = "idsector")
-    private Integer idSector;
+    @Column(name = "name")
+    private String  name;
 
-    @Column(name = "keydescription")
-    private String  keyDescription;
+    @Column(name = "available")
+    private Integer available;
 
-    @Setter
-    @Column(name = "withdrawdate")
-    private Date    withdrawDate;
-
-    @Setter
-    @Column(name = "returndate")
-    private Date    returnDate;
+    @OneToOne
+    @JoinColumn(name = "id_Sector", nullable = false)
+    private TblSector sector;
 
 }
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Chaves - Hospital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #f8f9fa; /* Cor de fundo clara */
+        }
+
+        .navbar-custom .nav-link {
+            color: #0d6efd; /* Cor azul clara padrão */
+            transition: background-color 0.3s ease; /* Transição suave para a mudança de cor */
+        }
+
+        .navbar-custom .nav-link:hover {
+            background-color: #0b5ed7; /* Cor azul escura ao passar o mouse */
+            color: white; /* Cor do texto branco ao passar o mouse */
+        }
+
+        .presentation-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .presentation-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .github-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .github-link:hover {
+            background-color: #555;
+        }
+
+        .student-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-key-fill me-2"></i>Chaves</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html"><i class="bi bi-house-door-fill me-2"></i>Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.html"><i class="bi bi-person-fill me-2"></i>Funcionários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="setores.html"><i class="bi bi-building-fill me-2"></i>Setores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chaves.html"><i class="bi bi-key-fill me-2"></i>Chaves</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autorizacoes.html"><i class="bi bi-file-earmark-check-fill me-2"></i>Autorizações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html"><i class="bi bi-hand-index-thumb-fill me-2"></i>Empréstimos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-1">
+        <section class="presentation-section">
+            <h1 class="mb-2">Bem-vindo ao Sistema de Controle de Chaves Hospitalares <i class="bi bi-hospital-fill"></i></h1>
+            <p class="lead">Gerencie o acesso e a movimentação de chaves de forma eficiente e segura em nosso ambiente hospitalar.</p>
+
+            <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/5463390-key-icon-set-vector-design-template-in-white-background-gratis-vetor.jpg" width="300" alt="Ilustração de Controle de Chaves" class="presentation-image">
+
+            <p>Este sistema foi desenvolvido para simplificar o processo de empréstimo e devolução de chaves, garantindo que cada chave seja rastreada e que apenas funcionários autorizados possam acessá-las.</p>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-person-lines-fill me-2"></i>Controle de Funcionários</h5>
+                            <p class="card-text">Registre e gerencie os dados dos funcionários autorizados a emprestar chaves.</p>
+                            <a href="funcionarios.html" class="btn btn-outline-primary btn-sm"><i class="bi bi-eye-fill me-1"></i>Ver Funcionários</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-building-gear-fill me-2"></i>Gerenciamento de Setores</h5>
+                            <p class="card-text">Organize as chaves por setores do hospital para facilitar a localização.</p>
+                            <a href="setores.html" class="btn btn-outline-success btn-sm"><i class="bi bi-eye-fill me-1"></i>Ver Setores</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-key-fill me-2"></i>Registro de Chaves</h5>
+                            <p class="card-text">Cadastre novas chaves e acompanhe sua disponibilidade.</p>
+                            <a href="chaves.html" class="btn btn-outline-info btn-sm"><i class="bi bi-plus-square-fill me-1"></i>Gerenciar Chaves</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-file-earmark-check-fill me-2"></i>Autorizações e Empréstimos</h5>
+                            <p class="card-text">Controle as autorizações de acesso e o histórico de empréstimos de chaves.</p>
+                            <a href="autorizacoes.html" class="btn btn-outline-warning btn-sm"><i class="bi bi-list-check me-1"></i>Verificar Autorizações</a>
+                            <a href="emprestimos.html" class="btn btn-outline-danger btn-sm"><i class="bi bi-arrow-left-right me-1"></i>Gerenciar Empréstimos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://github.com/seu-usuario/seu-repositorio" target="_blank" class="github-link"><i class="bi bi-github me-2"></i>Ver no GitHub</a>
+        </section>
+
+        <div class="student-info d-flex align-items-center justify-content-center">
+            <strong>Desenvolvido por:</strong>
+            <ul class="list-unstyled d-flex align-items-center m-0 p-0">
+                <li class="mx-2"><i class="bi bi-dot"></i></li>
+                <li class="me-2">Ana Flávia Miranda Morais 2320579</li>
+                <li class="mx-2"><i class="bi bi-dot"></i></li>
+                <li class="me-2">Douglas Eduardo Guimarães Pereira 2320841</li>
+                <li class="mx-2"><i class="bi bi-dot"></i></li>
+                <li class="me-2">Eduardo de andrade 2320795</li>
+                <li class="mx-2"><i class="bi bi-dot"></i></li>
+                <li class="me-2">Micael Vitor 2320983</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

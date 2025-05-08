@@ -1,47 +1,67 @@
 package Trab.Service;
 
+import Trab.DTOs.KeyDTOs.CreatedKeyDTO;
 import Trab.Model.TblKey;
+import Trab.Model.TblSector;
 import Trab.Repository.KeyRepository;
+import Trab.Repository.SectorRepository;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class KeyService {
 
     @Autowired
-    private KeyRepository keyRepository;
+    private final KeyRepository keyRepository;
+    private final SectorRepository sectorRepository;
 
-    //Cria uma nova chave no banco
-    public TblKey createNewKey (TblKey key) { return keyRepository.save(key); }
 
-    //Busca chave pelo id
-    public Optional<TblKey> serchKeyById(Integer idKey) { return keyRepository.findById(idKey); }
+    //Create a new key in database
+    public TblKey createNewKey (CreatedKeyDTO key) {
+        Integer idSector = key.getIdSector();
+        TblSector sector = sectorRepository.findById(idSector).orElseThrow(()->new RuntimeException("Setor nao encontrado"));
 
-    //Cria descrição da na tabela
-    public TblKey createDescription(TblKey description) { return  keyRepository.save(description); }
+        TblKey _key = new TblKey();
+        _key.setName(key.getName());
+        _key.setAvailable(1);
+        _key.setSector(sector);
 
-    //insere uma data de retirada da chave
-    public TblKey setwithDrawDate ( Integer idKey, Date date) {
-        Optional<TblKey> keyOptional = serchKeyById(idKey); //recupera o objeto TblKey baseado no id
-        if (keyOptional.isPresent()) { //verifica se o objeto foi recuperado
-            TblKey key = keyOptional.get(); //peva o objeto TblKey
-            key.setWithDrawDate(date); //atualiza a data de retirada
-            return keyRepository.save(key); // salva o ojetco atualizado
-        }
-        return null;
+        return keyRepository.save(_key);
     }
 
-    //insere uma data de devolução
-    public TblKey setReturnDate ( Integer idKey, Date returnDate) {
-        Optional<TblKey> key = serchKeyById(idKey);
-        if (key.isPresent()) {
-            TblKey keyReturn = key.get();
-          keyReturn.setReturnDate(returnDate);
-            return keyRepository.save(keyReturn);
-        }
-        return null;
+    //Search key by id
+    public Optional<TblKey> serchKeyById(Integer idKey) {
+        return keyRepository.findById(idKey);
     }
+
+    public List<TblKey> getAllKeys() {
+        return keyRepository.findAll();
+    }
+
+    //Update key by id
+    public TblKey updateKey(Integer id) {
+        TblKey existingKey = keyRepository.findById(id).orElseThrow(() -> new RuntimeException("Key not found"));
+        //existingKey.setName(key.getName());
+        Integer valor = existingKey.getAvailable();
+        if (valor == 1) {
+            existingKey.setAvailable(0);
+        } else {
+            existingKey.setAvailable(1);
+        }
+        System.out.println();
+        return keyRepository.save(existingKey);
+    }
+
+    public void deleteKeyById(Integer id) {
+        keyRepository.deleteById(id);
+    }
+
 
 }
 

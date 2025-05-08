@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .navbar-custom {
+            background-color: #f8f9fa; /* Cor de fundo clara */
+        }
+
+        .navbar-custom .nav-link {
+            color: #0d6efd; /* Cor azul clara padrão */
+            transition: background-color 0.3s ease; /* Transição suave para a mudança de cor */
+        }
+
+        .navbar-custom .nav-link:hover {
+            background-color: #0b5ed7; /* Cor azul escura ao passar o mouse */
+            color: white; /* Cor do texto branco ao passar o mouse */
+        }
+
+        .presentation-section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .presentation-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .github-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .github-link:hover {
+            background-color: #555;
+        }
+
+        .student-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="bi bi-key-fill me-2"></i>Chaves</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html"><i class="bi bi-house-door-fill me-2"></i>Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="funcionarios.html"><i class="bi bi-person-fill me-2"></i>Funcionários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="setores.html"><i class="bi bi-building-fill me-2"></i>Setores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chaves.html"><i class="bi bi-key-fill me-2"></i>Chaves</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="autorizacoes.html"><i class="bi bi-file-earmark-check-fill me-2"></i>Autorizações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="emprestimos.html"><i class="bi bi-hand-index-thumb-fill me-2"></i>Empréstimos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <h1 class="mb-4">Sistema de Empréstimo de Chaves</h1>
+        <!-- Cadastro de Setor -->
+        <div class="card mb-3 mx-5" style="width: 800px;">
+            <div class="card-header"><strong>CADASTRO DE SETORES</strong></div>
+            <div class="card-body">
+                <form id="formSetor">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Nome do Setor" id="nomeSetor" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de Setores -->
+        <div class="mt-5 mb-5 mx-5" style="width: 800px;">
+            <h5>Lista de setores cadastrados</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr><th>ID</th><th>Nome</th><th>Ações</th></tr>
+                </thead>
+                <tbody id="tabelaSetores"></tbody>
+            </table>
+        </div>
+    </div>
+
+<script>
+    const api = 'http://localhost:8080';
+
+    function handleSubmit(formId, endpoint, getData, updateTable) {
+        document.getElementById(formId).addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = getData();
+            console.log(data); // Logando os dados para depuração
+            try {
+                const res = await fetch(`${api}/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.message || 'Erro ao salvar o registro.');
+                }
+                await res.json(); // Ou res.text() se o backend não retornar JSON
+                alert('Registro salvo com sucesso!');
+                if (updateTable) updateTable();
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        });
+    }
+
+    function carregarTabela(endpoint, tabelaId, renderRow) {
+        fetch(`${api}/${endpoint}`)
+            .then(res => res.json())
+            .then(data => {
+                const tabela = document.getElementById(tabelaId);
+                tabela.innerHTML = data.map(renderRow).join('');
+            });
+    }
+
+    function atualizarTabelaSetores() {
+        carregarTabela('Sector/all', 'tabelaSetores', setor => `
+            <tr>
+                <td>${setor.id}</td>
+                <td>${setor.name}</td>
+                <td><i class="bi bi-trash2-fill me-2" role="button" onclick="deletarSetor(${setor.id})"> Excluir</i></td>
+            </tr>
+        `);
+    }
+
+    atualizarTabelaSetores();
+
+    // Chamada para handleSubmit
+    handleSubmit('formSetor', 'Sector/create', () => ({
+        name: document.getElementById('nomeSetor').value
+    }), atualizarTabelaSetores);
+
+    async function deletarSetor(id) {
+        if (confirm('Tem certeza que deseja apagar este setor?')) {
+            try {
+                const res = await fetch(`${api}/Sector/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Erro ao excluir setor.');
+                }
+
+                alert('Setor excluído com sucesso!');
+                atualizarTabelaSetores();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

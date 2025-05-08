@@ -1,9 +1,9 @@
 package Trab.Repository;
 
-import Trab.Model.TblKey;
+import Trab.Model.TblLoan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KeyRepository extends JpaRepository<TblKey, Integer> {
+public interface LoanRepository extends JpaRepository<TblLoan, Integer> {
 }
