@@ -38,10 +38,10 @@ public class LoanController {
     }
 
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<LoanResponseDTO> deleteLoanById(@PathVariable Integer id) {
+    @DeleteMapping("/delete/{id}/{idKey}")
+    public ResponseEntity<LoanResponseDTO> deleteLoanById(@PathVariable Integer id,@PathVariable Integer idKey) {
         try {
-            loanService.deleteLoanById(id);
+            loanService.deleteLoanById(id, idKey);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

@@ -68,7 +68,11 @@ public class LoanService {
     public TblLoan findById(Integer id) {
         return loanRepository.findById(id).orElseThrow(() -> new RuntimeException("Empréstimo não encontrado"));
     }
-    public void deleteLoanById(Integer id) {
+
+    public void deleteLoanById(Integer id, Integer idKey) {
+        auth.updateKey(idKey);
+
+
         loanRepository.deleteById(id);
     }
 }

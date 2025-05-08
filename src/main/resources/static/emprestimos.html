@@ -173,7 +173,7 @@
                 <td>${emprestimo.idLoan}</td>
                 <td>${emprestimo.employee.nameEmployee}</td>
                 <td>${emprestimo.key.name}</td>
-                <td><i class="bi bi-box-arrow-in-left me-2" role="button" onclick="deletarEmprestimo(${emprestimo.idLoan})"> Devolver</i></td>
+                <td><i class="bi bi-box-arrow-in-left me-2" role="button" onclick="deletarEmprestimo(${emprestimo.idLoan}, ${emprestimo.key.idKey})"> Devolver</i></td>
             </tr>
         `);
     }
@@ -186,10 +186,10 @@
         idKey: parseInt(document.getElementById('idChaveEmprestimo').value)
     }), atualizarTabelaEmprestimos);
 
-    async function deletarEmprestimo(id) {
+    async function deletarEmprestimo(id, idKey) {
         if (confirm('Confirma a devolução da chave ?')) {
             try {
-                const res = await fetch(`${api}/Loan/delete/${id}`, {
+                const res = await fetch(`${api}/Loan/delete/${id}/${idKey}`, {
                     method: 'DELETE'
                 });
 
