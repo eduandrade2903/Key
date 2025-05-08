@@ -15,4 +15,7 @@ public class TblSector {
     @Column(name = "name")
     private String name;
 
+    public Integer getId() {
+        return idSector;
+    }
 }

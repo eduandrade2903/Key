@@ -1,5 +1,4 @@
 package Trab.Model;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -9,22 +8,23 @@ import lombok.Data;
 @Table(name = "tbl_authorization")
 public class TblAuthorization {
 
-    @Column (name = "id")
     @Id
+    @Column (name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAuthorization;
+
     @Column (name = "id_employee")
     private Integer idEmployee;
     @Column (name = "id_sector")
     private Integer idSector;
 
-    @OneToOne
+    @ManyToOne
     @NotNull
-    @JoinColumn (name = "id_employee", nullable = false, insertable = false, updatable = false)
+    @JoinColumn (name = "id_employee", nullable = false, insertable=false, updatable=false)
     private TblEmployee employee;
 
-    @OneToOne
+    @ManyToOne
     @NotNull
-    @JoinColumn (name = "id_sector", nullable = false, insertable = false, updatable = false)
+    @JoinColumn (name = "id_sector", nullable = false, insertable=false, updatable=false)
     private TblSector sector;
 }

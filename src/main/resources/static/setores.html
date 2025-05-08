@@ -110,7 +110,7 @@
             <h5>Lista de setores cadastrados</h5>
             <table class="table table-bordered">
                 <thead>
-                    <tr><th>ID</th><th>Nome</th></tr>
+                    <tr><th>ID</th><th>Nome</th><th>Ações</th></tr>
                 </thead>
                 <tbody id="tabelaSetores"></tbody>
             </table>
@@ -158,6 +158,7 @@
             <tr>
                 <td>${setor.id}</td>
                 <td>${setor.name}</td>
+                <td><i class="bi bi-trash2-fill me-2" role="button" onclick="deletarSetor(${setor.id})"> Excluir</i></td>
             </tr>
         `);
     }
@@ -168,6 +169,27 @@
     handleSubmit('formSetor', 'Sector/create', () => ({
         name: document.getElementById('nomeSetor').value
     }), atualizarTabelaSetores);
+
+    async function deletarSetor(id) {
+        if (confirm('Tem certeza que deseja apagar este setor?')) {
+            try {
+                const res = await fetch(`${api}/Sector/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Erro ao excluir setor.');
+                }
+
+                alert('Setor excluído com sucesso!');
+                atualizarTabelaSetores();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

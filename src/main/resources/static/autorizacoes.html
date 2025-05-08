@@ -123,37 +123,89 @@
                 <th>ID</th>
                 <th>Funcionário</th>
                 <th>Setor</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody id="tabela-autorizacoes"></tbody>
         </table>
     </div>
 </div>
-        <script>
-            const api = 'http://localhost:8080';
+    <script>
+        const api = 'http://localhost:8080';
 
-            function carregarTabela(endpoint, tabelaId, renderRow) {
-                fetch(`${api}/${endpoint}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const tabela = document.getElementById(tabelaId);
-                        tabela.innerHTML = data.map(renderRow).join('');
+        function handleSubmit(formId, endpoint, getData, updateTable) {
+            document.getElementById(formId).addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = getData();
+                try {
+                    const res = await fetch(`${api}/${endpoint}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
                     });
-            }
+                    if (!res.ok) {
+                        const error = await res.json();
+                        throw new Error(error.message || 'Erro ao salvar o registro.');
+                    }
+                    await res.json(); // Ou res.text() se o backend não retornar JSON
+                    alert('Registro salvo com sucesso!');
+                    if (updateTable) updateTable();
+                } catch (error) {
+                    alert('Erro: ' + error.message);
+                }
+            });
+        }
 
-            function atualizarTabelaAutorizacoes() {
-                carregarTabela('autorizacoes', 'tabelaAutorizacoes', autorizacao => `
-                    <tr>
-                        <td>${autorizacao.id}</td>
-                        <td>${autorizacao.funcionarioId}</td>
-                        <td>${autorizacao.setorId}</td>
-                    </tr>
-                `);
-            }
+    function carregarTabela(endpoint, tabelaId, renderRow) {
+        fetch(`${api}/${endpoint}`)
+            .then(res => res.json())
+            .then(data => {
+                const tabela = document.getElementById(tabelaId);
+                tabela.innerHTML = data.map(renderRow).join('');
+            });
+    }
 
-            atualizarTabelaAutorizacoes();
-        </script>
-        <script src="script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    function atualizarTabelaAutorizacoes() {
+        carregarTabela('Authorization/all', 'tabela-autorizacoes', autorizacao => `
+            <tr>
+                <td>${autorizacao.idAuthorization}</td>
+                <td>${autorizacao.employee.nameEmployee}</td>
+                <td>${autorizacao.sector.name}</td>
+                <td><i class="bi bi-trash2-fill me-2" role="button" onclick="deletarAutorizacao(${autorizacao.idAuthorization})"> Excluir</i></td>
+            </tr>
+        `);
+    }
+
+    atualizarTabelaAutorizacoes();
+
+    // Chamada para handleSubmit
+    handleSubmit('cadastro-autorizacao-form', 'Authorization/create', () => ({
+        idEmployee: parseInt(document.getElementById('idFuncionario').value),
+        idSector: parseInt(document.getElementById('idSetor').value)
+    }), atualizarTabelaAutorizacoes);
+
+    async function deletarAutorizacao(id) {
+        if (confirm('Tem certeza que deseja remover esta autorização?')) {
+            try {
+                const res = await fetch(`${api}/Authorization/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Erro ao remover autorização.');
+                }
+
+                alert('Autorização removida com sucesso!');
+                atualizarTabelaAutorizacoes();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
+    </script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@ public class TblEmployee {
     @Column(name = "id")
     @NotNull
     private Integer idEmployee;
+
     @NotBlank
     @Column(name = "name")
     private String  nameEmployee;
@@ -27,7 +28,8 @@ public class TblEmployee {
 
 
 
-    //public TblEmployee(Integer id, String nameEmployee, Integer idSector) {
-   // }
+    public Integer getId() {
+        return idEmployee;
+    }
 }
 

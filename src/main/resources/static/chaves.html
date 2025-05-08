@@ -115,7 +115,7 @@
             <h5>Lista de chaves cadastradas</h5>
             <table class="table table-bordered">
                 <thead>
-                    <tr><th>ID</th><th>Nome</th><th>Disponibilidade</th><th>Setor ID</th></tr>
+                    <tr><th>ID</th><th>Nome</th><th>Disponibilidade</th><th>Setor ID</th><th>Ações</th></tr>
                 </thead>
                 <tbody id="tabelaChaves"></tbody>
             </table>
@@ -164,6 +164,7 @@
                 <td>${chave.name}</td>
                 <td>${chave.available == '1' ? 'Sim' : 'Não'}</td>
                 <td>${chave.sector.name}</td>
+                <td><i class="bi bi-trash2-fill me-2" role="button" onclick="deletarChave(${chave.idKey})"> Excluir</i></td>
             </tr>
         `);
     }
@@ -175,6 +176,27 @@
         name: document.getElementById('nomeChave').value,
         idSector: parseInt(document.getElementById('idSetorChave').value)
     }), atualizarTabelaChaves);
+
+    async function deletarChave(id) {
+        if (confirm('Tem certeza que deseja apagar esta chave?')) {
+            try {
+                const res = await fetch(`${api}/Key/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Erro ao excluir chave.');
+                }
+
+                alert('Chave excluída com sucesso!');
+                atualizarTabelaChaves();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
 
 </script>
 <script src="script.js"></script>

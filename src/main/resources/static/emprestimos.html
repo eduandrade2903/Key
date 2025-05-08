@@ -122,6 +122,7 @@
                 <th>ID</th>
                 <th>Funcionário</th>
                 <th>Chave</th>
+                <th>Ações</th>
             </tr>
             </thead>
             <tbody id="tabelaEmprestimos"></tbody>
@@ -172,6 +173,7 @@
                 <td>${emprestimo.idLoan}</td>
                 <td>${emprestimo.employee.nameEmployee}</td>
                 <td>${emprestimo.key.name}</td>
+                <td><i class="bi bi-box-arrow-in-left me-2" role="button" onclick="deletarEmprestimo(${emprestimo.idLoan})"> Devolver</i></td>
             </tr>
         `);
     }
@@ -183,6 +185,27 @@
         idEmployee: parseInt(document.getElementById('idFuncionario').value),
         idKey: parseInt(document.getElementById('idChaveEmprestimo').value)
     }), atualizarTabelaEmprestimos);
+
+    async function deletarEmprestimo(id) {
+        if (confirm('Confirma a devolução da chave ?')) {
+            try {
+                const res = await fetch(`${api}/Loan/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Não foi possível realizar o registro.');
+                }
+
+                alert('Chave devolvida com sucesso!');
+                atualizarTabelaEmprestimos();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
 
 </script>
 <script src="script.js"></script>

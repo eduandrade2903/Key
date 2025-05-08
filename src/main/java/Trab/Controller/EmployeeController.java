@@ -46,7 +46,7 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Integer id) {
         employeeService.deleteEmployeeById(id);

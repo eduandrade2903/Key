@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorizationRepository extends JpaRepository<TblAuthorization, Integer> {
 
+    boolean existsByEmployeeIdAndSectorId(Integer idEmployee, Integer idSector);
+
 }

@@ -115,7 +115,7 @@
             <h5>Lista de funcionários cadastrados</h5>
             <table class="table table-bordered">
                 <thead>
-                    <tr><th>ID</th><th>Nome</th><th>Setor</th></tr>
+                    <tr><th>ID</th><th>Nome</th><th>Setor</th><th>Ações</th></tr>
                 </thead>
                 <tbody id="tabelaFuncionarios"></tbody>
             </table>
@@ -129,7 +129,6 @@
         document.getElementById(formId).addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = getData();
-            console.log(data); // Logando os dados para depuração
             try {
                 const res = await fetch(`${api}/${endpoint}`, {
                     method: 'POST',
@@ -164,6 +163,7 @@
                 <td>${funcionario.idEmployee}</td>
                 <td>${funcionario.nameEmployee}</td>
                 <td>${funcionario.idSector.name}</td>
+                <td><i class="bi bi-trash2-fill me-2" role="button" onclick="deletarFuncionario(${funcionario.idEmployee})"> Excluir</i></td>
             </tr>
         `);
     }
@@ -175,6 +175,28 @@
         nameEmployee: document.getElementById('nomeFuncionario').value,
         idSector: parseInt(document.getElementById('idSetor').value)
     }), atualizarTabelaFuncionarios);
+
+    async function deletarFuncionario(id) {
+        if (confirm('Tem certeza que deseja apagar este funcionário?')) {
+            try {
+                const res = await fetch(`${api}/employee/delete/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(errorText || 'Erro ao excluir funcionário.');
+                }
+
+                alert('Funcionário excluído com sucesso!');
+                atualizarTabelaFuncionarios();
+
+            } catch (error) {
+                alert('Erro: ' + error.message);
+            }
+        }
+    }
+
 
 </script>
 <script src="script.js"></script>
