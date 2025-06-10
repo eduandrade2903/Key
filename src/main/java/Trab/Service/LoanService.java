@@ -36,20 +36,23 @@ public class LoanService {
         TblKey key = keyRepository.findById(idKey)
                     .orElseThrow(() -> new RuntimeException("Chave não encontrada"));
 
-        // Aqui eu verifico se a chave está disponível
-        if(key.getAvailable() != 0){
-            key.setAvailable(0);
-            keyRepository.save(key);
-        } else {
-            throw new RuntimeException("Chave não disponivel.");
-        }
-
         // Aqui eu verifico se o id do funcionario e o id do setor da chave estão cadastrados na tabela de authorizaçao.
         Integer keySector = key.getSector().getIdSector();
         boolean isAuthorized = authorizationRepository.existsByEmployeeIdAndSectorId(idEmployee, keySector);
         if (!isAuthorized) {
             throw new RuntimeException("Funcionário não autorizado a pegar a chave deste setor.");
         }
+
+
+        // Aqui eu verifico se a chave está disponível
+        if(key.getAvailable() != 0){
+            key.setAvailable(0);
+            keyRepository.save(key);
+        }
+        else {
+            throw new RuntimeException("Chave não disponivel.");
+        }
+
 
 
 
