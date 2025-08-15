@@ -11,7 +11,7 @@ Este projeto é um sistema de gerenciamento de empréstimos de chaves, desenvolv
 
 ## Tecnologias Utilizadas
 
-- **Java 17**
+- **Java 23**
 - **Spring Boot**
 - **MySQL**
 - **Docker**
